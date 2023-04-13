@@ -2,13 +2,13 @@ package com.example.todolist.controller;
 
 import com.example.todolist.logic.NoteService;
 import com.example.todolist.persistence.data.Note;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("api/notes")
+@RestController
+@RequestMapping("api/notes")
 @RequiredArgsConstructor
 public class NoteController {
 
