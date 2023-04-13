@@ -24,6 +24,7 @@ public class NoteController {
         noteService.addNote(note);
     }
 
+
     @PutMapping
     void updateNote(@RequestBody Note changes) {
         noteService.updateNote(changes);
