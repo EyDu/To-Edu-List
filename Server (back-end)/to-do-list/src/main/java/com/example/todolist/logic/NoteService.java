@@ -21,13 +21,12 @@ public class NoteService {
     }
 
     public void updateNote(Note changes) {
-        // probably won't work but this is the idea
-        // update later with JPARepository
-        for (Note note: noteRepository.getNotes()) {
-            if (note.getId() == changes.getId()) {
-                note = changes;
-            }
-        }
+        Note noteToChange = noteRepository.getNotes().stream()
+                .filter(note -> note.getId() == changes.getId())
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Note with id " + changes.getId() + " doesn't exist"));
+        noteToChange.setMessage(changes.getMessage());
+        noteToChange.setStatus(changes.getStatus());
     }
 
     public void deleteNote(int id) {
