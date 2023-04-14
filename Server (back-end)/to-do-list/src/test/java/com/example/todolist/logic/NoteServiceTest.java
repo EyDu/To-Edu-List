@@ -7,14 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,6 +36,7 @@ class NoteServiceTest {
 
         when(noteRepository.getNotes()).thenReturn(notes);
     }
+
     @Test
     void getNotes() {
         List<Note> expectedNotes = new ArrayList<>();
@@ -52,7 +51,6 @@ class NoteServiceTest {
             assertEquals(expectedNotes.get(i).getId(), actualNotes.get(i).getId());
             assertEquals(expectedNotes.get(i).getStatus(), actualNotes.get(i).getStatus());
             assertEquals(expectedNotes.get(i).getMessage(), actualNotes.get(i).getMessage());
-
         }
     }
 
