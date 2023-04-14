@@ -16,4 +16,24 @@ public class Note {
     public int getId() {
         return this.id;
     }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public Status getStatus() {
+        return this.status;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
