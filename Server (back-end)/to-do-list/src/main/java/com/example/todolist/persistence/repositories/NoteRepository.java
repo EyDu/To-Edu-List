@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 public class NoteRepository {
 
-    List<Note> notes = new ArrayList<>();
+    // Temporary, quick solution to create working Tests
+    List<Note> notes = new ArrayList<>(List.of(new Note(1, "lala")));
 
     public List<Note> getNotes() {
         return notes;
