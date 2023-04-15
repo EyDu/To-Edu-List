@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/notes")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class NoteController {
 
     private final NoteService noteService;
@@ -30,8 +31,8 @@ public class NoteController {
         noteService.updateNote(changes);
     }
 
-    @DeleteMapping
-    void deleteNote(@RequestBody int id) {
+    @DeleteMapping("/{id}")
+    void deleteNote(@PathVariable int id) {
         noteService.deleteNote(id);
     }
 }
