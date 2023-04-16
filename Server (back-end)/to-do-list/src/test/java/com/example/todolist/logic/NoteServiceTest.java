@@ -1,6 +1,7 @@
 package com.example.todolist.logic;
 
-import com.example.todolist.persistence.data.Note;
+import com.example.todolist.persistence.enums.Status;
+import com.example.todolist.persistence.model.Note;
 import com.example.todolist.persistence.repositories.NoteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,11 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class NoteServiceTest {
@@ -23,26 +25,24 @@ class NoteServiceTest {
     @InjectMocks
     private NoteService noteService;
 
+
     @BeforeEach
-    public void init() {
-        Note note1 = new Note(1, "Test Note 1");
-        Note note2 = new Note(2, "Test Note 2");
-        Note note3 = new Note(3, "Test Note 3");
-        List<Note> notes = new ArrayList<>();
+    public void setUp() {
+        List<Note> testNotes = initTestNotes();
 
-        notes.add(note1);
-        notes.add(note2);
-        notes.add(note3);
+        when(noteService.getNotes()).thenReturn(testNotes);
+    }
 
-        when(noteRepository.getNotes()).thenReturn(notes);
+    private List<Note> initTestNotes() {
+        Note testNote1 = Note.builder().message("Test Note 1").status(Status.NOT_DONE).build();
+        Note testNote2 = Note.builder().message("Test Note 2").status(Status.IN_WORK).build();
+        Note testNote3 = Note.builder().message("Test Note 3").status(Status.FORGOTTEN).build();
+        return Arrays.asList(testNote1, testNote2, testNote3);
     }
 
     @Test
     void getNotes() {
-        List<Note> expectedNotes = new ArrayList<>();
-        expectedNotes.add(new Note(1, "Test Note 1"));
-        expectedNotes.add(new Note(2, "Test Note 2"));
-        expectedNotes.add(new Note(3, "Test Note 3"));
+        List<Note> expectedNotes = initTestNotes();
 
         List<Note> actualNotes = noteService.getNotes();
 
@@ -56,20 +56,28 @@ class NoteServiceTest {
 
     @Test
     void addNote() {
-        Note newNote = new Note(1, "Test note");
+        Note newNote = Note.builder().message("New Note").status(Status.NOT_DONE).build();
+        when(noteRepository.save(newNote)).thenReturn(newNote);
+
         noteService.addNote(newNote);
+
+        verify(noteRepository, times(1)).save(newNote);
+
+
         List<Note> notes = noteService.getNotes();
-        assertEquals(4, notes.size());
-        assertEquals(newNote, notes.get(3));
         assertTrue(notes.contains(newNote));
     }
 
     @Test
     void updateNote() {
-        Note updatedNote = new Note(1, "New Text");
+        Note updatedNote = Note.builder().id(1L).message("New Text").status(Status.NOT_DONE).build();
+
+        when(noteRepository.save(updatedNote)).thenReturn(updatedNote);
+        when(noteRepository.findById(updatedNote.getId())).thenReturn(Optional.of((updatedNote)));
+
         noteService.updateNote(updatedNote);
 
-        List<Note> notes = noteRepository.getNotes();
+        List<Note> notes = noteService.getNotes();
         Note note1 = notes.get(0);
         Note note2 = notes.get(1);
 
@@ -79,14 +87,17 @@ class NoteServiceTest {
 
     @Test
     void deleteNote() {
-        int idToDelete = 2;
+        long idToDelete = 2;
+        Note noteToDelete = Note.builder().id(idToDelete).build();
+        when(noteRepository.findById(idToDelete)).thenReturn(Optional.of(noteToDelete));
 
-        noteService.deleteNote(idToDelete);
+        noteService.deleteNote(2L);
+        List<Note> remainingNotes = noteService.getNotes();
+        assertNull(noteService.getNoteById(2L)); // should be deleted
+        assertEquals(1L, remainingNotes.get(0).getId()); // IDs should be updated
+        assertEquals(3L, remainingNotes.get(1).getId());
 
-        List<Note> notes = noteService.getNotes();
-        assertEquals(2, notes.size());
-
-        for (Note note:notes) {
+        for (Note note:remainingNotes) {
             assertNotEquals(idToDelete, note.getId());
         }
     }

@@ -1,18 +1,14 @@
 package com.example.todolist.persistence.repositories;
 
-import com.example.todolist.persistence.data.Note;
+import com.example.todolist.persistence.enums.Status;
+import com.example.todolist.persistence.model.Note;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class NoteRepository {
-
-    // Temporary, quick solution to create working Tests
-    List<Note> notes = new ArrayList<>(List.of(new Note(1, "lala")));
-
-    public List<Note> getNotes() {
-        return notes;
-    }
+public interface NoteRepository extends JpaRepository<Note, Long> {
+    Note findByMessage(String message);
+    List<Note> findNotesByStatus(Status status);
 }

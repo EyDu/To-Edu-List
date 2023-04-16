@@ -1,7 +1,7 @@
 package com.example.todolist.controller;
 
 import com.example.todolist.logic.NoteService;
-import com.example.todolist.persistence.data.Note;
+import com.example.todolist.persistence.model.Note;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteNote(@PathVariable int id) {
+    void deleteNote(@PathVariable Long id) {
         noteService.deleteNote(id);
     }
 }

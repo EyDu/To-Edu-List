@@ -1,7 +1,8 @@
 package com.example.todolist.controller;
 
 import com.example.todolist.logic.NoteService;
-import com.example.todolist.persistence.data.Note;
+import com.example.todolist.persistence.enums.Status;
+import com.example.todolist.persistence.model.Note;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,31 +34,34 @@ class NoteControllerTest {
     @MockBean
     NoteService noteService;
 
-    private Note sampleNote1;
-
-    private Note sampleNote2;
 
     @BeforeEach
     public void setUp() {
-        sampleNote1 = new Note(1, "Test Note 1");
-        sampleNote2 = new Note(2, "Test Note 2");
+        List<Note> testNotes = initTestNotes();
+    }
+
+    private List<Note> initTestNotes() {
+        Note testNote1 = Note.builder().message("Test Note 1").status(Status.NOT_DONE).build();
+        Note testNote2 = Note.builder().message("Test Note 2").status(Status.IN_WORK).build();
+        return Arrays.asList(testNote1, testNote2);
     }
 
     @Test
     void whenValidInput_thenReturns200() throws Exception {
-        Note note = new Note(0, "Test Note");
+        List<Note> testNotes = initTestNotes();
+        Note testNote1 = testNotes.get(0);
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api/notes"))
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/notes")
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(note)))
+                .content(objectMapper.writeValueAsString(testNote1)))
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(MockMvcRequestBuilders.put("/api/notes")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(note)))
+                        .content(objectMapper.writeValueAsString(testNote1)))
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/notes/1"))
@@ -66,6 +70,8 @@ class NoteControllerTest {
 
     @Test
     void whenInvalidInput_thenReturns4xx() throws Exception {
+        List<Note> testNotes = initTestNotes();
+        Note testNote1 = testNotes.get(0);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/notes")
                         .contentType("application/json")
@@ -79,26 +85,29 @@ class NoteControllerTest {
 
         this.mockMvc.perform(MockMvcRequestBuilders.delete("/api/notes")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(new Note(1, "lala"))))
+                        .content(objectMapper.writeValueAsString(testNote1)))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
     void getNotes() throws Exception {
-        List<Note> notes = Arrays.asList(sampleNote1, sampleNote2);
-        given(noteService.getNotes()).willReturn(notes);
+        List<Note> testNotes = initTestNotes();
+        given(noteService.getNotes()).willReturn(testNotes);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/notes"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{id:1,message:\"Test Note 1\"},{id:2,message:\"Test Note 2\"}]"));
+                .andExpect(content().json("[{id:1,message:\"Test Note 1\", status:\"NOT_DONE\"},{id:2,message:\"Test Note 2\",status:\"IN_WORK\"}]"));
 
     }
 
     @Test
     void addNote() throws Exception {
+        List<Note> testNotes = initTestNotes();
+        Note testNote1 = testNotes.get(0);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/api/notes")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(sampleNote1)))
+                        .content(objectMapper.writeValueAsString(testNote1)))
                 .andExpect(status().isOk());
 
         verify(noteService, times(1)).addNote(any(Note.class));
@@ -106,9 +115,12 @@ class NoteControllerTest {
 
     @Test
     void updateNote() throws Exception {
+        List<Note> testNotes = initTestNotes();
+        Note testNote1 = testNotes.get(0);
+
         mockMvc.perform(MockMvcRequestBuilders.put("/api/notes")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(sampleNote1)))
+                        .content(objectMapper.writeValueAsString(testNote1)))
                 .andExpect(status().isOk());
 
         verify(noteService, times(1)).updateNote(any(Note.class));
@@ -116,7 +128,7 @@ class NoteControllerTest {
 
     @Test
     void deleteNote() throws Exception{
-        int id = 1;
+        long id = 1;
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/notes/{id}", id))
                 .andExpect(status().isOk());
 
