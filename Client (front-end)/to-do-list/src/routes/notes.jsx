@@ -1,12 +1,13 @@
 import React, {useState, useEffect } from 'react';
 import {Status} from "../types.ts";
+import {Link} from "react-router-dom";
 
 export default function Notes() {
     const [notes, setNotes] = useState([]);
     const [formData, setFormData] = useState({
         id: '',
         message: '',
-        status: ''
+        status: Status.NOT_DONE
     });
 
     useEffect(() => {
@@ -107,25 +108,6 @@ export default function Notes() {
                     ))}
                     </tbody>
                 </table>
-                <h2>Add Note</h2>
-                <form onSubmit={handleAddNote}>
-                    <label>
-                        Message:
-                        <input type={"text"} name={"message"} value={formData.message} onChange={handleInputChange} />
-                    </label>
-                    <br />
-                    <label>
-                        Status:
-                        <select name="status" value={formData.status} onChange={handleInputChange}>
-                            <option value="DONE">Done</option>
-                            <option value="NOT_DONE">Not done</option>
-                            <option value="IN_WORK">In Work</option>
-                            <option value="FORGOTTEN">Forgotten</option>
-                        </select>
-                    </label>
-                    <br />
-                    <button type="submit">Add Note</button>
-                </form>
                 <h3>Update Note</h3>
                 <form onSubmit={handleUpdateNote}>
                     <label>
