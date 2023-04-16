@@ -3,14 +3,13 @@ package com.example.todolist.logic;
 import com.example.todolist.persistence.enums.Status;
 import com.example.todolist.persistence.model.Note;
 import com.example.todolist.persistence.repositories.NoteRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,80 +24,85 @@ class NoteServiceTest {
     @InjectMocks
     private NoteService noteService;
 
-
-    @BeforeEach
-    public void setUp() {
-        List<Note> testNotes = initTestNotes();
-
-        when(noteService.getNotes()).thenReturn(testNotes);
-    }
-
-    private List<Note> initTestNotes() {
-        Note testNote1 = Note.builder().message("Test Note 1").status(Status.NOT_DONE).build();
-        Note testNote2 = Note.builder().message("Test Note 2").status(Status.IN_WORK).build();
-        Note testNote3 = Note.builder().message("Test Note 3").status(Status.FORGOTTEN).build();
-        return Arrays.asList(testNote1, testNote2, testNote3);
-    }
-
     @Test
     void getNotes() {
-        List<Note> expectedNotes = initTestNotes();
+        List<Note> expectedNotes = new ArrayList<>();
+        Note note1 = Note.builder().id(1L).message("Note 1").status(Status.NOT_DONE).build();
+        Note note2 = Note.builder().id(2L).message("Note 2").status(Status.IN_WORK).build();
+        expectedNotes.add(note1);
+        expectedNotes.add(note2);
+
+        when(noteRepository.findAll()).thenReturn(expectedNotes);
 
         List<Note> actualNotes = noteService.getNotes();
 
-        assertEquals(expectedNotes.size(), actualNotes.size());
-        for (int i= 0; i < expectedNotes.size(); i++) {
-            assertEquals(expectedNotes.get(i).getId(), actualNotes.get(i).getId());
-            assertEquals(expectedNotes.get(i).getStatus(), actualNotes.get(i).getStatus());
-            assertEquals(expectedNotes.get(i).getMessage(), actualNotes.get(i).getMessage());
-        }
+        assertEquals(expectedNotes, actualNotes);
+    }
+
+    @Test
+    void getNoteById() {
+        long noteId = 1L;
+        Note expectedNote = Note.builder().id(noteId).message("Note").status(Status.NOT_DONE).build();
+
+        when(noteRepository.findById(noteId)).thenReturn(Optional.of(expectedNote));
+
+        Note actualNote = noteService.getNoteById(noteId);
+
+        assertEquals(expectedNote, actualNote);
+    }
+
+    @Test
+    void getNoteByIdNotFound() {
+        long noteId = 1L;
+
+        when(noteRepository.findById(noteId)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> noteService.getNoteById(noteId));
     }
 
     @Test
     void addNote() {
-        Note newNote = Note.builder().message("New Note").status(Status.NOT_DONE).build();
-        when(noteRepository.save(newNote)).thenReturn(newNote);
+        Note note = Note.builder().id(1L).message("Note").status(Status.NOT_DONE).build();
 
-        noteService.addNote(newNote);
+        noteService.addNote(note);
 
-        verify(noteRepository, times(1)).save(newNote);
-
-
-        List<Note> notes = noteService.getNotes();
-        assertTrue(notes.contains(newNote));
+        verify(noteRepository, times(1)).save(note);
     }
 
     @Test
     void updateNote() {
-        Note updatedNote = Note.builder().id(1L).message("New Text").status(Status.NOT_DONE).build();
+        long noteId = 1L;
+        Note existingNote = Note.builder().id(noteId).message("Note").status(Status.NOT_DONE).build();
+        Note updatedNote = Note.builder().id(noteId).message("Updated Note").status(Status.IN_WORK).build();
 
-        when(noteRepository.save(updatedNote)).thenReturn(updatedNote);
-        when(noteRepository.findById(updatedNote.getId())).thenReturn(Optional.of((updatedNote)));
+        when(noteRepository.findById(noteId)).thenReturn(Optional.of(existingNote));
+        when(noteRepository.save(existingNote)).thenReturn(updatedNote);
 
         noteService.updateNote(updatedNote);
 
-        List<Note> notes = noteService.getNotes();
-        Note note1 = notes.get(0);
-        Note note2 = notes.get(1);
+        verify(noteRepository, times(1)).findById(noteId);
+        verify(noteRepository, times(1)).save(existingNote);
 
-        assertEquals("New Text", note1.getMessage());
-        assertEquals("Test Note 2", note2.getMessage());
+        assertEquals(updatedNote.getMessage(), existingNote.getMessage());
+        assertEquals(updatedNote.getStatus(), existingNote.getStatus());
+    }
+
+    @Test
+    void updateNoteNotFound() {
+        long noteId = 1L;
+        Note updatedNote = Note.builder().id(noteId).message("Updated Note").status(Status.IN_WORK).build();
+
+        when(noteRepository.findById(noteId)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> noteService.updateNote(updatedNote));
     }
 
     @Test
     void deleteNote() {
-        long idToDelete = 2;
-        Note noteToDelete = Note.builder().id(idToDelete).build();
-        when(noteRepository.findById(idToDelete)).thenReturn(Optional.of(noteToDelete));
+        long noteId = 1L;
 
-        noteService.deleteNote(2L);
-        List<Note> remainingNotes = noteService.getNotes();
-        assertNull(noteService.getNoteById(2L)); // should be deleted
-        assertEquals(1L, remainingNotes.get(0).getId()); // IDs should be updated
-        assertEquals(3L, remainingNotes.get(1).getId());
+        noteService.deleteNote(noteId);
 
-        for (Note note:remainingNotes) {
-            assertNotEquals(idToDelete, note.getId());
-        }
+        verify(noteRepository, times(1)).deleteById(noteId);
     }
 }
