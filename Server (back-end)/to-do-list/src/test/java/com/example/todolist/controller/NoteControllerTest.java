@@ -11,12 +11,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -41,8 +43,8 @@ class NoteControllerTest {
     }
 
     private List<Note> initTestNotes() {
-        Note testNote1 = Note.builder().message("Test Note 1").status(Status.NOT_DONE).build();
-        Note testNote2 = Note.builder().message("Test Note 2").status(Status.IN_WORK).build();
+        Note testNote1 = Note.builder().id(1L).message("Test Note 1").status(Status.NOT_DONE).build();
+        Note testNote2 = Note.builder().id(2L).message("Test Note 2").status(Status.IN_WORK).build();
         return Arrays.asList(testNote1, testNote2);
     }
 
@@ -94,10 +96,14 @@ class NoteControllerTest {
         List<Note> testNotes = initTestNotes();
         given(noteService.getNotes()).willReturn(testNotes);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/notes"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/notes"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{id:1,message:\"Test Note 1\", status:\"NOT_DONE\"},{id:2,message:\"Test Note 2\",status:\"IN_WORK\"}]"));
+                .andReturn();
 
+        String actualResponse = result.getResponse().getContentAsString();
+
+        String expectedResponse = "[{\"id\":1,\"message\":\"Test Note 1\",\"status\":\"NOT_DONE\"},{\"id\":2,\"message\":\"Test Note 2\",\"status\":\"IN_WORK\"}]";
+        assertEquals(expectedResponse, actualResponse);
     }
 
     @Test
