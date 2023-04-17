@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1b6ab88b-b256-46e3-9ec3-80327fa84d4a" name="Changes" comment="- implemented Routing to &quot;/notes/add&quot;&#10;- Notes can be added there&#10;- Accidentally didn't upload some files, reuploading a couple files" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+        <option value="JUnit5 Test Class" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2ONwQxMcEqHPzYw11FRhWVO60bC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/eydu/Projects/simple-csv-converter-java-EyDu&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;24b761c8b268f1a304f4721890bf6d09&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/eydu/.local/share/JetBrains/Toolbox/apps/IDEA-U/ch-0/231.8109.175/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Client (front-end)/to-do-list/src" />
+      <recent name="$PROJECT_DIR$/Server (back-end)/to-do-list" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Server (back-end)" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.todolist.persistence.repositories" />
+      <recent name="com.example.todolist.logic" />
+      <recent name="com.example.todolist.controller" />
+      <recent name="org.example" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ToDoListApplication">
+    <configuration name="NoteControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to-do-list" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.todolist.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.todolist.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.example.todolist.controller.NoteControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NoteControllerTest.getNotes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to-do-list" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.todolist.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.todolist.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.example.todolist.controller.NoteControllerTest" />
+      <option name="METHOD_NAME" value="getNotes" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NoteServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to-do-list" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.todolist.logic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.todolist.logic" />
+      <option name="MAIN_CLASS_NAME" value="com.example.todolist.logic.NoteServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NoteServiceTest.getNotes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to-do-list" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.todolist.logic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.todolist.logic" />
+      <option name="MAIN_CLASS_NAME" value="com.example.todolist.logic.NoteServiceTest" />
+      <option name="METHOD_NAME" value="getNotes" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NoteServiceTest.updateNote" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to-do-list" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.todolist.logic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.todolist.logic" />
+      <option name="MAIN_CLASS_NAME" value="com.example.todolist.logic.NoteServiceTest" />
+      <option name="METHOD_NAME" value="updateNote" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ToDoListApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="APP_DB_HOST" value="localhost" />
+        <env name="APP_DB_NAME" value="to_edu_list" />
+        <env name="APP_DB_PORT" value="5432" />
+        <env name="PSQL_PASSWORD" value="Kadamu72" />
+        <env name="PSQL_USERNAME" value="eydu" />
+      </envs>
+      <module name="to-do-list" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.todolist.ToDoListApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.NoteControllerTest.getNotes" />
+      <item itemvalue="JUnit.NoteServiceTest" />
+      <item itemvalue="JUnit.NoteServiceTest.getNotes" />
+      <item itemvalue="JUnit.NoteServiceTest.updateNote" />
+      <item itemvalue="JUnit.NoteControllerTest" />
+      <item itemvalue="Spring Boot.ToDoListApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.NoteServiceTest" />
+        <item itemvalue="JUnit.NoteServiceTest.updateNote" />
+        <item itemvalue="JUnit.NoteServiceTest.getNotes" />
+        <item itemvalue="JUnit.NoteControllerTest" />
+        <item itemvalue="JUnit.NoteControllerTest.getNotes" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b6ab88b-b256-46e3-9ec3-80327fa84d4a" name="Changes" comment="" />
+      <created>1681414336151</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681414336151</updated>
+      <workItem from="1681414337136" duration="19598000" />
+      <workItem from="1681506154506" duration="7026000" />
+      <workItem from="1681558415204" duration="5279000" />
+      <workItem from="1681598567995" duration="13711000" />
+      <workItem from="1681654961302" duration="4911000" />
+      <workItem from="1681666064491" duration="185000" />
+      <workItem from="1681666493787" duration="615000" />
+    </task>
+    <task id="LOCAL-00001" summary="Start of Projects! &#10;&#10;created: &#10;- basic structure (persistence, controller, ...)&#10;- 'Note' data class&#10;- 'NoteService' service class&#10;- 'NoteRepository' repository class&#10;- 'Status' enum&#10;- 'NoteController' controller class">
+      <created>1681415911335</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681415911335</updated>
+    </task>
+    <task id="LOCAL-00002" summary="implemented functions and functionality inside Note, NoteController, NoteRepository &amp; NoteController.&#10;&#10;---&gt; simple CRUD operations now &quot;possible&quot; (not tested yet).">
+      <created>1681417440067</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681417440067</updated>
+    </task>
+    <task id="LOCAL-00003" summary="implemented functions and functionality inside Note, NoteController, NoteRepository &amp; NoteController.&#10;&#10;---&gt; simple CRUD operations now &quot;possible&quot; (not tested yet).">
+      <created>1681417481166</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681417481166</updated>
+    </task>
+    <task id="LOCAL-00004" summary="- implemented @RequestMapping in NoteController (with the url path at the right spot^^)&#10;- made a simple get-Connection mockMvc-test">
+      <created>1681419541433</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681419541433</updated>
+    </task>
+    <task id="LOCAL-00005" summary="- implemented more MockMvc-200-Status tests&#10;- implemented temporary &quot;note&quot; in note repository for test purposes">
+      <created>1681463187162</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681463187162</updated>
+    </task>
+    <task id="LOCAL-00006" summary="- NoteControllerTest has been halted for the moment and is incomplete&#10;- NoteServiceTest has been implemented and works">
+      <created>1681479329634</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681479329634</updated>
+    </task>
+    <task id="LOCAL-00007" summary="- NoteRepositoryTest has been implemented and works">
+      <created>1681479975253</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681479975253</updated>
+    </task>
+    <task id="LOCAL-00008" summary="- enabled CORS in Controller and changed deleteNote to take PathVariable instead of RequestBody&#10;- implemented Notes.jsx as a route, enabling all CRUD operations to the Controller">
+      <created>1681570320472</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681570320472</updated>
+    </task>
+    <task id="LOCAL-00009" summary="- (finally) added some WebMvcTests for the Endpoints. &#10;&#10;Milestone1 achieved!">
+      <created>1681572818225</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681572818225</updated>
+    </task>
+    <task id="LOCAL-00010" summary="- Note is now an Entity &#10;- PSQL Database connected to App&#10;- Table created via QueryConsole&#10;- noteRepository changed to JpaRepository (name is still NoteRepository)&#10;- adapted NoteService to new JpaRepository&#10;- implemented DataJpaTests for new NoteRepository (and it works, yay)&#10;- the other Tests need an overhaul and don't work yet">
+      <created>1681609757576</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681609757576</updated>
+    </task>
+    <task id="LOCAL-00011" summary="- NoteControllerTest now works &#10;- NoteServiceTest still needs overhaul">
+      <created>1681610196854</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1681610196854</updated>
+    </task>
+    <task id="LOCAL-00012" summary="- NoteServiceTest now working properly">
+      <created>1681641188766</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681641188766</updated>
+    </task>
+    <task id="LOCAL-00013" summary="- implemented Routing to &quot;/notes/add&quot;&#10;- Notes can be added there&#10;- Accidentally didn't upload some files, reuploading a couple files">
+      <created>1681658846822</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1681658846822</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Start of Projects! &#10;&#10;created: &#10;- basic structure (persistence, controller, ...)&#10;- 'Note' data class&#10;- 'NoteService' service class&#10;- 'NoteRepository' repository class&#10;- 'Status' enum&#10;- 'NoteController' controller class" />
+    <MESSAGE value="implemented functions and functionality inside Note, NoteController, NoteRepository &amp; NoteController.&#10;&#10;---&gt; simple CRUD operations now &quot;possible&quot; (not tested yet)." />
+    <MESSAGE value="- implemented @RequestMapping in NoteController (with the url path at the right spot^^)&#10;- made a simple get-Connection mockMvc-test" />
+    <MESSAGE value="- implemented more MockMvc-200-Status tests&#10;- implemented temporary &quot;note&quot; in note repository for test purposes" />
+    <MESSAGE value="- NoteControllerTest has been halted for the moment and is incomplete&#10;- NoteServiceTest has been implemented and works&#10;- updateNote()-method in NoteService has been improved" />
+    <MESSAGE value="- NoteRepositoryTest has been implemented and works" />
+    <MESSAGE value="- enabled CORS in Controller and changed deleteNote to take PathVariable instead of RequestBody&#10;- implemented Notes.jsx as a route, enabling all CRUD operations to the Controller" />
+    <MESSAGE value="- (finally) added some WebMvcTests for the Endpoints. &#10;&#10;Milestone1 achieved!" />
+    <MESSAGE value="- Note is now an Entity &#10;- PSQL Database connected to App&#10;- Table created via QueryConsole&#10;- noteRepository changed to JpaRepository (name is still NoteRepository)&#10;- adapted NoteService to new JpaRepository&#10;- implemented DataJpaTests for new NoteRepository (and it works, yay)&#10;- the other Tests need an overhaul and don't work yet" />
+    <MESSAGE value="- NoteControllerTest now works &#10;- NoteServiceTest still needs overhaul" />
+    <MESSAGE value="- NoteServiceTest now working properly" />
+    <MESSAGE value="- implemented Routing to &quot;/notes/add&quot;&#10;- Notes can be added there&#10;- Accidentally didn't upload some files, reuploading a couple files" />
+    <option name="LAST_COMMIT_MESSAGE" value="- implemented Routing to &quot;/notes/add&quot;&#10;- Notes can be added there&#10;- Accidentally didn't upload some files, reuploading a couple files" />
+  </component>
+</project>
