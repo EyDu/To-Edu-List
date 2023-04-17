@@ -16,14 +16,14 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
-    String message;
+    private String message;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    Status status;
+    private Status status;
 
     @Override
     public boolean equals(Object o) {
