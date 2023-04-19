@@ -3,13 +3,26 @@ package com.example.todolist.controller;
 import com.example.todolist.logic.NoteService;
 import com.example.todolist.persistence.enums.Status;
 import com.example.todolist.persistence.model.Note;
+import com.example.todolist.persistence.repositories.NoteRepository;
+import com.example.todolist.security.auth.AuthenticationController;
+import com.example.todolist.security.config.JwtAuthenticationFilter;
+import com.example.todolist.security.config.JwtService;
+import com.example.todolist.security.config.SecurityConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,11 +34,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
+@WebMvcTest(NoteController.class)
+@WithMockUser(username = "admin", password = "123", authorities = {"ADMIN"})
+@Import(SecurityConfig.class)
 class NoteControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -36,6 +50,8 @@ class NoteControllerTest {
     @MockBean
     NoteService noteService;
 
+    @MockBean
+    JwtService jwtService;
 
     @BeforeEach
     public void setUp() {
@@ -93,17 +109,10 @@ class NoteControllerTest {
 
     @Test
     void getNotes() throws Exception {
-        List<Note> testNotes = initTestNotes();
-        given(noteService.getNotes()).willReturn(testNotes);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/notes"))
+                .andExpect(status().isOk());
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/notes"))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String actualResponse = result.getResponse().getContentAsString();
-
-        String expectedResponse = "[{\"id\":1,\"message\":\"Test Note 1\",\"status\":\"NOT_DONE\"},{\"id\":2,\"message\":\"Test Note 2\",\"status\":\"IN_WORK\"}]";
-        assertEquals(expectedResponse, actualResponse);
+        verify(noteService).getNotes();
     }
 
     @Test

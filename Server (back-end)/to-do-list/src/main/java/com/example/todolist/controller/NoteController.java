@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/notes")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")  //Delete and pout in SecConfig
 public class NoteController {
 
     private final NoteService noteService;
